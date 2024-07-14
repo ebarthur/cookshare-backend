@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  firstname      String?
+  username       String?         @unique
+  recipes        Recipe[]
+  avatar         String?
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @updatedAt
+  deleted_at     DateTime?
+  saves          Save[]
+  bio            String?
+  following      Follower[]      @relation("followers")
+  followers      Follower[]      @relation("following")
+  Like           Like[]
+  AuthCredential AuthCredential?
+}
+
+model Recipe {
+  id         Int       @id @default(autoincrement())
+  content    String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  published  Boolean?  @default(true)
+  user       User?     @relation(fields: [userId], references: [id])
+  userId     String
+  images     String[]  @default([])
+  saves      Save[]
+  likes      Like[]
+  tags       String[]  @default([])
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+}
+
+model Save {
+  id         Int       @id @default(autoincrement())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
+  recipes    Recipe    @relation(fields: [recipeId], references: [id])
+  recipeId   Int
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+}
+
+model Category {
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+  Recipe     Recipe[]
+}
+
+model Like {
+  id         Int       @id @default(autoincrement())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
+  recipe     Recipe    @relation(fields: [recipeId], references: [id])
+  recipeId   Int
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+}
+
+model Follower {
+  id          Int       @id @default(autoincrement())
+  follower    User      @relation("followers", fields: [followerId], references: [id])
+  followerId  String
+  following   User      @relation("following", fields: [followingId], references: [id])
+  followingId String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime?
+}
+
+model AuthCredential {
+  id       String @id @default(uuid())
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @unique
+  password String
+}
