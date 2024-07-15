@@ -1,11 +1,8 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   UseGuards,
 } from '@nestjs/common'
 import { UsersService } from './users.service'
@@ -16,6 +13,8 @@ import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
 import { AuthUserDto } from './dto/auth-user.dto'
 import { UserProfileDto } from './dto/user-profile.dto'
 import { FollowDto } from './dto/follow.dto'
+import { ChangeAvatarDto } from './dto/change-avatar.dto'
+
 
 @ApiTags('users')
 @Controller('users')
@@ -75,10 +74,10 @@ export class UsersController {
   @UseGuards(JwtGuard)
   @Post('update-user-avatar')
   async updateUserAvatar(
-    @Body() { avatar }: { avatar: string },
+    @Body() data: ChangeAvatarDto,
     @ReqUser() user: ReqUserType,
   ) {
-    return this.usersService.updateUserAvatar(avatar, user.userId.id);
+    return this.usersService.updateUserAvatar(data, user.userId.id);
   }
 }
 

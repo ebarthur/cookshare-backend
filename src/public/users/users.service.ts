@@ -10,6 +10,7 @@ import * as bcrypt from 'bcrypt'
 import { AuthUserDto } from './dto/auth-user.dto'
 import { FollowDto } from './dto/follow.dto'
 import { ProfileDto } from './dto/profile.dto'
+import { ChangeAvatarDto } from './dto/change-avatar.dto'
 
 @Injectable()
 export class UsersService {
@@ -35,7 +36,7 @@ export class UsersService {
 
     await this.prisma.authCredential.create({
       data: {
-        password: await bcrypt.hash(data.password, 10),
+        password: await bcrypt.hash(data.password, process.env.ROUNDS || 10),
         userId: user.id,
       },
     })
@@ -73,7 +74,7 @@ export class UsersService {
       },
     })
 
-    if (!!usernameTaken) {
+    if (!!usernameTaken && usernameTaken.id !== userId) {
       throw new ConflictException('Username already taken')
     }
 
@@ -248,13 +249,13 @@ export class UsersService {
     }
   }
 
-  async updateUserAvatar(avatar: string, userId: string) {
+  async updateUserAvatar(data: ChangeAvatarDto, userId: string) {
     const res = await this.prisma.user.update({
       where: {
         id: userId,
       },
       data: {
-        avatar,
+        ...data,
       },
     })
 

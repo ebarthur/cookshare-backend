@@ -2,8 +2,19 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
+const PORT =
+  process.env.NODE_ENV === 'production'
+    ? Number.parseInt(process.env.PORT)
+    : 3000
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log'],
+  })
+  app.enableCors({
+    origin: ['http:localhost:3000'],
+    methods: ['GET', 'POST'],
+    allowedHeaders: 'Content-Type,Authorization',
+  })
 
   const config = new DocumentBuilder()
     .setTitle('CookShare API')
@@ -15,6 +26,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document)
 
-  await app.listen(3000)
+  await app.listen(PORT)
 }
 bootstrap()
