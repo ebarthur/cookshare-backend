@@ -1,4 +1,4 @@
-<h1>CookShare Backend</h1>
+<h1>CookShare Backend🍔</h1>
 
 <p>This is the complete backend repository for CookShare</p>
 <img width="1506" alt="Screenshot 2024-02-20 at 12 56 23 PM" src="./swaggerss.png">
