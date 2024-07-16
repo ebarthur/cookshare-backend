@@ -10,7 +10,7 @@
 	<li><strong>Rate &amp; Like :</strong> Show your appreciation by liking and rating your favorite recipes.</li>
 	<li><strong>Upload Images:</strong> Capture and upload multiple images to showcase your favorite dishes and drinks.</li>
 	<li><strong>Follow Friends:</strong> Stay updated with your friends&#39; latest recipes.</li>
-	<li><strong>Save Finds:</strong> Bookmark recipes to try later.</li>
+	<li><strong>Save Recipes:</strong> Bookmark recipes to try later.</li>
 	<li><strong>Search:</strong> Easily find recipes using our intuitive search feature.</li>
 </ul>
 
