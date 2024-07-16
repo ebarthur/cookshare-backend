@@ -1,73 +1,37 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<h1>CookShare Backend</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<p>This is the complete backend repository for CookShare</p>
+<img width="1506" alt="Screenshot 2024-02-20 at 12 56 23 PM" src="./swaggerss.png">
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<h2>Features</h2>
 
-## Description
+<ul>
+	<li><strong>Discover:</strong> Find new recipes shared from all over the world.</li>
+	<li><strong>Rate &amp; Like :</strong> Show your appreciation by liking and rating your favorite recipes.</li>
+	<li><strong>Upload Images:</strong> Capture and upload multiple images to showcase your favorite dishes and drinks.</li>
+	<li><strong>Follow Friends:</strong> Stay updated with your friends&#39; latest recipes.</li>
+	<li><strong>Save Finds:</strong> Bookmark recipes to try later.</li>
+	<li><strong>Search:</strong> Easily find recipes using our intuitive search feature.</li>
+</ul>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<h2>Technical Stack</h2>
 
-## Installation
+<ul>
+	<li><strong>Language:</strong> TypeScript</li>
+	<li><strong>Framework:</strong> Nest.js</li>
+	<li><strong>ORM:</strong> Prisma</li>
+	<li><strong>Database:</strong> PostgreSQL</li>
+</ul>
 
-```bash
-$ yarn install
-```
+<h2>Todo</h2>
 
-## Running the app
+<ul>
+  <li> Create API endpoints for recipe liking and saving functionalities.</li>
+  <li>Integrate image upload functionality using AWS.</li>
+  <li>Enhance search functionality with advanced filtering and sorting options.</li>
+  <li>Optimize database queries and ensure scalability with Prisma ORM.</li>
+</ul>
 
-```bash
-# development
-$ yarn run start
+<h2>License</h2>
 
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+<p>This project is licensed under the MIT License.</p>

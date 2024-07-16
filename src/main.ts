@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
+import * as passport from 'passport'
 
 const PORT =
   process.env.NODE_ENV === 'production'
@@ -15,6 +16,8 @@ async function bootstrap() {
     methods: ['GET', 'POST'],
     allowedHeaders: 'Content-Type,Authorization',
   })
+
+  app.use(passport.initialize())
 
   const config = new DocumentBuilder()
     .setTitle('CookShare API')

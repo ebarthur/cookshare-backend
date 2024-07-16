@@ -6,7 +6,6 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { UsersService } from './users.service'
-import { CreateUserDto } from './dto/create-user.dto'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
@@ -21,13 +20,12 @@ import { ChangeAvatarDto } from './dto/change-avatar.dto'
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-   // TODO: Define return type
-  // @ApiBearerAuth()
-  // @UseGuards(JwtGuard)
-  // @Post('profile/:id')
-  // async getProfileAndRecipes(@Param('id') id: string) {
-  //   return this.usersService.getProfileAndRecipes(id)
-  // }
+  @ApiBearerAuth()
+  @UseGuards(JwtGuard)
+  @Post('profile/:id')
+  async getProfileAndRecipes(@Param('id') id: string): Promise<UserProfileDto> {
+    return this.usersService.getProfileAndRecipes(id)
+  }
 
   @ApiBearerAuth() 
   @UseGuards(JwtGuard)

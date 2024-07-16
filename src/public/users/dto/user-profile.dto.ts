@@ -1,7 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { Dto } from 'src/lib/dto/Dto'
+import { RecipeDto } from 'src/public/recipes/dto/recipe.dto'
 
-export class UserProfileDto {
+export class UserProfileDto extends Dto<UserProfileDto> {
   @ApiProperty()
   @IsString()
   id: string
@@ -32,6 +34,6 @@ export class UserProfileDto {
   @IsNumber()
   following: number
 
-  // @ApiProperty({})
-  // recipes:
+  @ApiProperty({ type: [RecipeDto] })
+  recipes: RecipeDto[]
 }

@@ -1,6 +1,5 @@
 import {
   ConflictException,
-  HttpException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
@@ -11,6 +10,7 @@ import { AuthUserDto } from './dto/auth-user.dto'
 import { FollowDto } from './dto/follow.dto'
 import { ProfileDto } from './dto/profile.dto'
 import { ChangeAvatarDto } from './dto/change-avatar.dto'
+import { UserProfileDto } from './dto/user-profile.dto'
 
 @Injectable()
 export class UsersService {
@@ -44,14 +44,56 @@ export class UsersService {
     return user
   }
 
-  // async getProfileAndRecipes(id: string) {
-  //   return await this.prisma.user.findUnique({
-  //     where: { id },
-  //     include: {
-  //       recipes: true,
-  //     },
-  //   })
-  // }
+  async getProfileAndRecipes(userId: string) {
+    const profile = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        followers: true,
+        following: true,
+        recipes: {
+          include: {
+            category: true,
+          },
+          orderBy: {
+            created_at: 'desc',
+          },
+        },
+      },
+    })
+
+    if (!profile) {
+      return null
+    }
+
+    return new UserProfileDto({
+      id: profile.id,
+      username: profile.username,
+      avatar: profile.avatar,
+      firstname: profile.firstname,
+      followers: profile.followers.length,
+      following: profile.following.length,
+      bio: profile.bio,
+      recipes: profile.recipes.map((recipe) => ({
+        id: recipe.id,
+        createdAt: recipe.created_at,
+        images: recipe.images,
+        tags: recipe.tags,
+        content: recipe.content,
+        category: {
+          id: recipe.category.id,
+          name: recipe.category.name,
+        },
+        user: {
+          firstname: profile.firstname,
+          id: profile.id,
+          username: profile.username,
+          avatar: profile.avatar,
+        },
+      })),
+    })
+  }
 
   async updateUsername(username: string, userId: string) {
     if (username.length < 3) {

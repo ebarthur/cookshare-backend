@@ -4,6 +4,7 @@ import { UsersModule } from './public/users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { ConfigModule } from '@nestjs/config'
+import { RecipesModule } from './public/recipes/recipes.module'
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config'
         limit: 50,
       },
     ]),
+    RecipesModule,
   ],
   controllers: [],
   providers: [],
