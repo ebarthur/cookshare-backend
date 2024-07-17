@@ -4,6 +4,7 @@ import {
   Body,
   Param,
   UseGuards,
+  Logger,
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
@@ -18,7 +19,10 @@ import { ChangeAvatarDto } from './dto/change-avatar.dto'
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  logger: Logger
+  constructor(private readonly usersService: UsersService) {
+    this.logger = new Logger()
+  }
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)

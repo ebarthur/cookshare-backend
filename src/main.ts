@@ -12,7 +12,7 @@ async function bootstrap() {
     logger: ['error', 'warn', 'log'],
   })
   app.enableCors({
-    origin: ['http:localhost:3000'],
+    origin: [`${process.env.WEB_DOMAIN}`],
     methods: ['GET', 'POST'],
     allowedHeaders: 'Content-Type,Authorization',
   })

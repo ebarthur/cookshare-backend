@@ -3,6 +3,7 @@ import {
   Post,
   Body,
   UseGuards,
+  Logger,
 } from '@nestjs/common'
 import { RecipesService } from './recipes.service'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
@@ -15,7 +16,10 @@ import { CategoryDto } from './dto/category.dto'
 @ApiTags('recipes')
 @Controller('recipes')
 export class RecipesController {
-  constructor(private readonly recipesService: RecipesService) {}
+  logger: Logger
+  constructor(private readonly recipesService: RecipesService) {
+    this.logger = new Logger()
+  }
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
