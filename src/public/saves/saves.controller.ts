@@ -2,9 +2,9 @@ import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common';
 import { SavesService } from './saves.service';
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ReqUser, ReqUserType } from './../../auth/utils/user.decorator';
-import { UserSaveDto } from './dto/userSave.dto';
+import { UserSaveDto } from './dto/user-save.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { ActiveSaveDto } from './dto/activeSave.dto';
+import { ActiveSaveDto } from './dto/active-save.dto';
 import { SkipThrottle } from '@nestjs/throttler';
 
 @ApiTags('saves')

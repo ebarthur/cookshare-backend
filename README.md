@@ -26,7 +26,6 @@
 <h2>Todo</h2>
 
 <ul>
-  <li> Create API endpoints for recipe liking and saving functionalities.</li>
   <li>Integrate image upload functionality using AWS.</li>
   <li>Enhance search functionality with advanced filtering and sorting options.</li>
   <li>Optimize database queries and ensure scalability with Prisma ORM.</li>

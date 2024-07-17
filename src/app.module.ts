@@ -5,7 +5,8 @@ import { AuthModule } from './auth/auth.module'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { ConfigModule } from '@nestjs/config'
 import { RecipesModule } from './public/recipes/recipes.module'
-import { SavesModule } from './public/saves/saves.module';
+import { SavesModule } from './public/saves/saves.module'
+import { LikesModule } from './public/likes/likes.module'
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SavesModule } from './public/saves/saves.module';
     ]),
     RecipesModule,
     SavesModule,
+    LikesModule,
   ],
   controllers: [],
   providers: [],
