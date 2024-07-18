@@ -23,14 +23,6 @@
 	<li><strong>Database:</strong> PostgreSQL</li>
 </ul>
 
-<h2>Todo</h2>
-
-<ul>
-  <li>Integrate image upload functionality using AWS.</li>
-  <li>Enhance search functionality with advanced filtering and sorting options.</li>
-  <li>Optimize database queries and ensure scalability with Prisma ORM.</li>
-</ul>
-
 <h2>License</h2>
 
 <p>This project is licensed under the MIT License.</p>
