@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config'
 import { RecipesModule } from './public/recipes/recipes.module'
 import { SavesModule } from './public/saves/saves.module'
 import { LikesModule } from './public/likes/likes.module'
+import { SearchModule } from './public/search/search.module';
+import { UploadModule } from './public/upload/upload.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { LikesModule } from './public/likes/likes.module'
     RecipesModule,
     SavesModule,
     LikesModule,
+    SearchModule,
+    UploadModule,
   ],
   controllers: [],
   providers: [],
