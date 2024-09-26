@@ -7,14 +7,11 @@ import { ConfigModule } from '@nestjs/config'
 import { RecipesModule } from './public/recipes/recipes.module'
 import { SavesModule } from './public/saves/saves.module'
 import { LikesModule } from './public/likes/likes.module'
-import { SearchModule } from './public/search/search.module';
-import { UploadModule } from './public/upload/upload.module';
+import { SearchModule } from './public/search/search.module'
+import { UploadModule } from './public/upload/upload.module'
 
 @Module({
   imports: [
-    PrismaModule,
-    UsersModule,
-    AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot([
       {
@@ -22,6 +19,9 @@ import { UploadModule } from './public/upload/upload.module';
         limit: 50,
       },
     ]),
+    PrismaModule,
+    UsersModule,
+    AuthModule,
     RecipesModule,
     SavesModule,
     LikesModule,

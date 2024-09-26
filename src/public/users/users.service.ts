@@ -36,7 +36,10 @@ export class UsersService {
 
     await this.prisma.authCredential.create({
       data: {
-        password: await bcrypt.hash(data.password, process.env.ROUNDS || 10),
+        password: await bcrypt.hash(
+          data.password,
+          Number.parseInt(process.env.ROUNDS) || 10,
+        ),
         userId: user.id,
       },
     })
