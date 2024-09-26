@@ -11,12 +11,14 @@ import { FollowDto } from './dto/follow.dto'
 import { ProfileDto } from './dto/profile.dto'
 import { ChangeAvatarDto } from './dto/change-avatar.dto'
 import { UserProfileDto } from './dto/user-profile.dto'
+import { ChangeBioDto } from './dto/change-bio-dto'
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateUserDto) {
+    // Check if the user already exists
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email: data.email,
@@ -26,25 +28,28 @@ export class UsersService {
     if (existingUser) {
       throw new ConflictException('User already exists')
     }
+    // []: Starting a transaction so we either succeed or fail to write.
+    const result = await this.prisma.$transaction(async (prisma) => {
+      const user = await prisma.user.create({
+        data: {
+          email: data.email,
+        },
+        select: { id: true },
+      })
+      await prisma.authCredential.create({
+        data: {
+          password: await bcrypt.hash(
+            data.password,
+            Number.parseInt(process.env.ROUNDS) || 10,
+          ),
+          userId: user.id,
+        },
+      })
 
-    const user = await this.prisma.user.create({
-      data: {
-        email: data.email,
-      },
-      select: { id: true },
+      return user
     })
 
-    await this.prisma.authCredential.create({
-      data: {
-        password: await bcrypt.hash(
-          data.password,
-          Number.parseInt(process.env.ROUNDS) || 10,
-        ),
-        userId: user.id,
-      },
-    })
-
-    return user
+    return result
   }
 
   async getProfileAndRecipes(userId: string) {
@@ -310,5 +315,21 @@ export class UsersService {
       username: res.username,
       avatar: res.avatar,
     })
+  }
+
+  async changeBio(userId: string, data: ChangeBioDto) {
+    const user = await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data,
+    })
+
+    if (!user) {
+      throw new NotFoundException('User not found')
+    }
+
+    // []: Neither ProfileDTO nor AuthUserDTO has bio so this endpoint is useless for now
+    return user
   }
 }

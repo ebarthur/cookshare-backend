@@ -14,7 +14,7 @@ import { AuthUserDto } from './dto/auth-user.dto'
 import { UserProfileDto } from './dto/user-profile.dto'
 import { FollowDto } from './dto/follow.dto'
 import { ChangeAvatarDto } from './dto/change-avatar.dto'
-
+import { ChangeBioDto } from './dto/change-bio-dto'
 
 @ApiTags('users')
 @Controller('users')
@@ -31,10 +31,13 @@ export class UsersController {
     return this.usersService.getProfileAndRecipes(id)
   }
 
-  @ApiBearerAuth() 
+  @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('username/:username')
-  async updateUsername(@Param('username') username: string, @ReqUser() user: ReqUserType) {
+  async updateUsername(
+    @Param('username') username: string,
+    @ReqUser() user: ReqUserType,
+  ) {
     return await this.usersService.updateUsername(username, user.userId.id)
   }
 
@@ -45,21 +48,24 @@ export class UsersController {
     @Param('firstname') firstname: string,
     @ReqUser() user: ReqUserType,
   ): Promise<AuthUserDto> {
-    return this.usersService.updateFirstname(firstname, user.userId.id);
+    return this.usersService.updateFirstname(firstname, user.userId.id)
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('user')
   async getUser(@ReqUser() user: ReqUserType): Promise<AuthUserDto> {
-    return this.usersService.getUser(user.userId.id);
+    return this.usersService.getUser(user.userId.id)
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('follow/:id')
-  async followUser(@Param('id') id: string, @ReqUser() user: ReqUserType): Promise<FollowDto> {
-    return this.usersService.followUser(id, user.userId.id);
+  async followUser(
+    @Param('id') id: string,
+    @ReqUser() user: ReqUserType,
+  ): Promise<FollowDto> {
+    return this.usersService.followUser(id, user.userId.id)
   }
 
   @ApiBearerAuth()
@@ -69,7 +75,7 @@ export class UsersController {
     @Param('id') id: string,
     @ReqUser() user: ReqUserType,
   ): Promise<boolean> {
-    return this.usersService.getFollowStatus(id, user.userId.id);
+    return this.usersService.getFollowStatus(id, user.userId.id)
   }
 
   @ApiBearerAuth()
@@ -79,7 +85,16 @@ export class UsersController {
     @Body() data: ChangeAvatarDto,
     @ReqUser() user: ReqUserType,
   ) {
-    return this.usersService.updateUserAvatar(data, user.userId.id);
+    return this.usersService.updateUserAvatar(data, user.userId.id)
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtGuard)
+  @Post('update-user-bio')
+  async updateUserBio(
+    @Body() data: ChangeBioDto,
+    @ReqUser() user: ReqUserType,
+  ) {
+    return this.usersService.changeBio(user.userId.id, data)
   }
 }
-
