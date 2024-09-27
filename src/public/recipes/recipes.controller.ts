@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseGuards,
-  Logger,
-} from '@nestjs/common'
+import { Controller, Post, Body, UseGuards, Logger } from '@nestjs/common'
 import { RecipesService } from './recipes.service'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
@@ -28,21 +22,20 @@ export class RecipesController {
     return this.recipesService.getAllRecipes()
   }
 
-    @ApiBearerAuth()
+  @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('following')
   async followingFinds(@ReqUser() user: ReqUserType): Promise<RecipeDto[]> {
-    return this.recipesService.getFollowingRecipes(user.userId.id);
+    return this.recipesService.getFollowingRecipes(user.userId.id)
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('recipe')
   async getRecipeById(@Body() { id }: { id: string }): Promise<RecipeDto> {
-    return this.recipesService.getRecipeById(Number(id));
+    return this.recipesService.getRecipeById(Number(id))
   }
 
-  
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('create')
@@ -50,13 +43,13 @@ export class RecipesController {
     @ReqUser() user: ReqUserType,
     @Body() createRecipeDto: CreateRecipeDto,
   ): Promise<RecipeDto> {
-    return this.recipesService.createRecipe(user.userId.id, createRecipeDto);
+    return this.recipesService.createRecipe(user.userId.id, createRecipeDto)
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post('categories')
   async getAllCategories(@ReqUser() user: ReqUserType): Promise<CategoryDto[]> {
-    return this.recipesService.getAllCategories(user.userId.id);
+    return this.recipesService.getAllCategories(user.userId.id)
   }
 }

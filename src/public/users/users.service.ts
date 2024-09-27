@@ -1,5 +1,7 @@
 import {
   ConflictException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
@@ -18,7 +20,6 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateUserDto) {
-    // Check if the user already exists
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email: data.email,
@@ -48,6 +49,11 @@ export class UsersService {
 
       return user
     })
+    if (!result)
+      throw new HttpException(
+        'An error occurred while creating user',
+        HttpStatus.BAD_REQUEST,
+      )
 
     return result
   }
@@ -323,13 +329,49 @@ export class UsersService {
         id: userId,
       },
       data,
+      include: {
+        followers: true,
+        following: true,
+        recipes: {
+          include: {
+            category: true,
+          },
+          orderBy: {
+            created_at: 'desc',
+          },
+        },
+      },
     })
 
     if (!user) {
       throw new NotFoundException('User not found')
     }
 
-    // []: Neither ProfileDTO nor AuthUserDTO has bio so this endpoint is useless for now
-    return user
+    return new UserProfileDto({
+      id: user.id,
+      username: user.username,
+      avatar: user.avatar,
+      firstname: user.firstname,
+      followers: user.followers.length,
+      following: user.following.length,
+      bio: user.bio,
+      recipes: user.recipes.map((recipe) => ({
+        id: recipe.id,
+        createdAt: recipe.created_at,
+        images: recipe.images,
+        tags: recipe.tags,
+        content: recipe.content,
+        category: {
+          id: recipe.category.id,
+          name: recipe.category.name,
+        },
+        user: {
+          firstname: user.firstname,
+          id: user.id,
+          username: user.username,
+          avatar: user.avatar,
+        },
+      })),
+    })
   }
 }

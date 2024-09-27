@@ -7,9 +7,7 @@ import { ApiTags } from '@nestjs/swagger'
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   async login(@Body() data: LoginDto) {
@@ -18,6 +16,6 @@ export class AuthController {
 
   @Post('register')
   async registerUser(@Body() data: CreateUserDto) {
-    return await this.authService.createUser(data) 
+    return await this.authService.createUser(data)
   }
 }
