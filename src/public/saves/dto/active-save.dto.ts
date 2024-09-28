@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Exclude } from 'class-transformer'
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 import { Dto } from 'src/lib/dto/Dto'
 
