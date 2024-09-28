@@ -1,7 +1,7 @@
 <h1>CookShare Backend🍔</h1>
 
 <p>This is the complete backend repository for CookShare.</p>
-<img width="1506" alt="Screenshot 2024-02-20 at 12 56 23 PM" src="./swaggerss.png">
+<img width="1506" alt="cookshare-api" src="https://cookshare-image-uploads.s3.amazonaws.com/b0f7505e-6a5a-45f4-8a12-23aa6c6eb95a-1727533660380-1.jpeg">
 
 <h2>Features</h2>
 
