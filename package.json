@@ -8,10 +8,10 @@
   "scripts": {
     "build": "nest build",
     "format": "yarn biome check --write ./src ./test",
-    "start": "nest start",
+    "start": "prisma migrate deploy && prisma generate && yarn prisma db seed && nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/src/main",
+    "start:prod": "prisma migrate deploy && prisma generate && yarn prisma db seed && node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
