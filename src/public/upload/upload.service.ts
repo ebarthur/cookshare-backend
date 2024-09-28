@@ -7,6 +7,10 @@ import * as sharp from 'sharp'
 export class UploadService {
   private readonly s3Client = new S3Client({
     region: this.configService.getOrThrow('AWS_S3_REGION'),
+    credentials: {
+      accessKeyId: this.configService.getOrThrow('S3_ACCESS_KEY'),
+      secretAccessKey: this.configService.getOrThrow('S3_SECRET_ACCESS_KEY'),
+    },
   })
 
   constructor(private readonly configService: ConfigService) {}
@@ -55,13 +59,13 @@ export class UploadService {
 
       await this.s3Client.send(
         new PutObjectCommand({
-          Bucket: 'recipe-image-uploads',
+          Bucket: 'cookshare-image-uploads',
           Key: s3ImageKey,
           Body: processedImage,
         }),
       )
 
-      const s3Uri = `https://recipe-image-uploads.s3.amazonaws.com/${s3ImageKey}`
+      const s3Uri = `https://cookshare-image-uploads.s3.amazonaws.com/${s3ImageKey}`
       uploadedUris.push(s3Uri)
     }
 
