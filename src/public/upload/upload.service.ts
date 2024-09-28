@@ -62,6 +62,7 @@ export class UploadService {
           Bucket: 'cookshare-image-uploads',
           Key: s3ImageKey,
           Body: processedImage,
+          ContentType: 'image/jpeg',
         }),
       )
 
