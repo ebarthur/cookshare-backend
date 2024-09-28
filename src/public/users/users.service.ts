@@ -4,6 +4,7 @@ import {
   HttpStatus,
   Injectable,
   NotFoundException,
+  PreconditionFailedException,
 } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { PrismaService } from 'src/prisma/prisma.service'
@@ -20,6 +21,15 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateUserDto) {
+    const { email, password } = data
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      throw new PreconditionFailedException('Use a valid email')
+    }
+
+    if (password.length < 8) {
+      throw new PreconditionFailedException('Minimum 8 chars for password')
+    }
+
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email: data.email,

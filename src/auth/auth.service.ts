@@ -1,10 +1,10 @@
 import {
   Injectable,
   NotFoundException,
+  PreconditionFailedException,
   UnauthorizedException,
 } from '@nestjs/common'
 import { UsersService } from 'src/public/users/users.service'
-import { User } from '@prisma/client'
 import { JwtService } from '@nestjs/jwt'
 import { CreateUserDto } from 'src/public/users/dto/create-user.dto'
 import { AuthUserDto } from 'src/public/users/dto/auth-user.dto'
@@ -22,6 +22,15 @@ export class AuthService {
   ) {}
 
   async login(data: LoginDto): Promise<LoginResponseDto> {
+    const { email, password } = data
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      throw new PreconditionFailedException('Use a valid email')
+    }
+
+    if (password.length < 8) {
+      throw new PreconditionFailedException('Minimum 8 chars for password')
+    }
+
     const user = await this.prisma.user.findUnique({
       where: { email: data.email },
     })
