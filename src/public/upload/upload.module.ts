@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common'
-import { UploadService } from './upload.service'
-import { UploadController } from './upload.controller'
-import { PrismaModule } from 'src/prisma/prisma.module'
 import { APP_GUARD } from '@nestjs/core'
 import { ThrottlerGuard } from '@nestjs/throttler'
+import { PrismaModule } from 'src/prisma/prisma.module'
+import { UploadController } from './upload.controller'
+import { UploadService } from './upload.service'
 
 @Module({
   controllers: [UploadController],

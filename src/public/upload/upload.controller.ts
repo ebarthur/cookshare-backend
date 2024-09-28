@@ -8,12 +8,12 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common'
-import { UploadService } from './upload.service'
 import { FilesInterceptor } from '@nestjs/platform-express'
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger'
 import { UploadDto } from './dto/upload.dto'
+import { UploadService } from './upload.service'
 
 @ApiTags('upload')
 @Controller('upload')

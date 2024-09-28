@@ -1,11 +1,11 @@
 import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
-import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { SkipThrottle } from '@nestjs/throttler'
-import { LikesService } from './likes.service'
-import { UserLikeDto } from './dto/user-like.dto'
-import { ActiveLikeDto } from './dto/active-like.dto'
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
+import { ActiveLikeDto } from './dto/active-like.dto'
+import { UserLikeDto } from './dto/user-like.dto'
+import { LikesService } from './likes.service'
 
 @ApiTags('likes')
 @Controller('likes')

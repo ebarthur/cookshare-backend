@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
-import { ProfileDto } from '../users/dto/profile.dto'
-import { RecipeDto } from '../recipes/dto/recipe.dto'
 import { CategoryDto } from '../recipes/dto/category.dto'
+import { RecipeDto } from '../recipes/dto/recipe.dto'
+import { ProfileDto } from '../users/dto/profile.dto'
 
 @Injectable()
 export class SearchService {

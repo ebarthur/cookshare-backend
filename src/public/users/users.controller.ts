@@ -1,20 +1,20 @@
 import {
-  Controller,
-  Post,
   Body,
-  Param,
-  UseGuards,
+  Controller,
   Logger,
+  Param,
+  Post,
+  UseGuards,
 } from '@nestjs/common'
-import { UsersService } from './users.service'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
 import { AuthUserDto } from './dto/auth-user.dto'
-import { UserProfileDto } from './dto/user-profile.dto'
-import { FollowDto } from './dto/follow.dto'
 import { ChangeAvatarDto } from './dto/change-avatar.dto'
 import { ChangeBioDto } from './dto/change-bio-dto'
+import { FollowDto } from './dto/follow.dto'
+import { UserProfileDto } from './dto/user-profile.dto'
+import { UsersService } from './users.service'
 
 @ApiTags('users')
 @Controller('users')

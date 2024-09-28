@@ -6,15 +6,15 @@ import {
   NotFoundException,
   PreconditionFailedException,
 } from '@nestjs/common'
-import { CreateUserDto } from './dto/create-user.dto'
-import { PrismaService } from 'src/prisma/prisma.service'
 import * as bcrypt from 'bcrypt'
+import { PrismaService } from 'src/prisma/prisma.service'
 import { AuthUserDto } from './dto/auth-user.dto'
+import { ChangeAvatarDto } from './dto/change-avatar.dto'
+import { ChangeBioDto } from './dto/change-bio-dto'
+import { CreateUserDto } from './dto/create-user.dto'
 import { FollowDto } from './dto/follow.dto'
 import { ProfileDto } from './dto/profile.dto'
-import { ChangeAvatarDto } from './dto/change-avatar.dto'
 import { UserProfileDto } from './dto/user-profile.dto'
-import { ChangeBioDto } from './dto/change-bio-dto'
 
 @Injectable()
 export class UsersService {

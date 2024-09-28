@@ -1,9 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
-import { UserLikeDto } from './dto/user-like.dto'
 import { CategoryDto } from '../recipes/dto/category.dto'
-import { ActiveLikeDto } from './dto/active-like.dto'
 import { ProfileDto } from '../users/dto/profile.dto'
+import { ActiveLikeDto } from './dto/active-like.dto'
+import { UserLikeDto } from './dto/user-like.dto'
 
 @Injectable()
 export class LikesService {

@@ -1,9 +1,9 @@
 import { Controller, Param, Post, UseGuards } from '@nestjs/common'
-import { SearchService } from './search.service'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
-import { ProfileDto } from '../users/dto/profile.dto'
 import { RecipeDto } from '../recipes/dto/recipe.dto'
+import { ProfileDto } from '../users/dto/profile.dto'
+import { SearchService } from './search.service'
 
 @ApiTags('search')
 @Controller('search')

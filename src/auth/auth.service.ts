@@ -4,14 +4,14 @@ import {
   PreconditionFailedException,
   UnauthorizedException,
 } from '@nestjs/common'
-import { UsersService } from 'src/public/users/users.service'
 import { JwtService } from '@nestjs/jwt'
-import { CreateUserDto } from 'src/public/users/dto/create-user.dto'
+import * as bcrypt from 'bcrypt'
+import { PrismaService } from 'src/prisma/prisma.service'
 import { AuthUserDto } from 'src/public/users/dto/auth-user.dto'
+import { CreateUserDto } from 'src/public/users/dto/create-user.dto'
+import { UsersService } from 'src/public/users/users.service'
 import { LoginResponseDto } from './dto/login-response.dto'
 import { LoginDto } from './dto/login.dto'
-import { PrismaService } from 'src/prisma/prisma.service'
-import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {

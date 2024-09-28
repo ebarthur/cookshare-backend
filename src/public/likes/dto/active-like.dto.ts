@@ -1,6 +1,6 @@
-import { Dto } from 'src/lib/dto/Dto'
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { Dto } from 'src/lib/dto/Dto'
 
 export class ActiveLikeDto extends Dto<ActiveLikeDto> {
   @ApiProperty()

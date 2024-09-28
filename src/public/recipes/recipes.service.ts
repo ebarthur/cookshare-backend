@@ -5,10 +5,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
-import { CategoryDto } from './dto/category.dto'
-import { RecipeDto } from './dto/recipe.dto'
-import { CreateRecipeDto } from './dto/create-recipe.dto'
 import { ProfileDto } from '../users/dto/profile.dto'
+import { CategoryDto } from './dto/category.dto'
+import { CreateRecipeDto } from './dto/create-recipe.dto'
+import { RecipeDto } from './dto/recipe.dto'
 
 @Injectable()
 export class RecipesService {
