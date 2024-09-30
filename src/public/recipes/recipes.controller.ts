@@ -1,5 +1,5 @@
 import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common'
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
 import { CategoryDto } from './dto/category.dto'
@@ -31,9 +31,18 @@ export class RecipesController {
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+    },
+  })
   @Post('recipe')
-  async getRecipeById(@Body() { id }: { id: string }): Promise<RecipeDto> {
-    return this.recipesService.getRecipeById(Number(id))
+  async getRecipeById(@Body() { id }: { id: number }): Promise<RecipeDto> {
+    return this.recipesService.getRecipeById(id)
   }
 
   @ApiBearerAuth()

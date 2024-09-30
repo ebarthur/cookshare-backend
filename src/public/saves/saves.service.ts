@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common'
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { CategoryDto } from '../recipes/dto/category.dto'
 import { ProfileDto } from '../users/dto/profile.dto'
@@ -82,6 +86,15 @@ export class SavesService {
   async updateSave(recipeId: number, userId: string) {
     if (!userId) {
       throw new UnauthorizedException()
+    }
+
+    const recipe = await this.prisma.recipe.findFirst({
+      where: {
+        id: recipeId,
+      },
+    })
+    if (!recipe) {
+      throw new NotFoundException('Recipe not found')
     }
 
     const existingSave = await this.prisma.save.findFirst({

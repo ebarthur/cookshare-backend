@@ -1,5 +1,5 @@
 import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common'
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger'
 import { SkipThrottle } from '@nestjs/throttler'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { ReqUser, ReqUserType } from 'src/auth/utils/user.decorator'
@@ -26,6 +26,15 @@ export class LikesController {
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @SkipThrottle()
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+    },
+  })
   @Post('recipe-user-like')
   async getFindUserLike(
     @ReqUser() user: ReqUserType,
@@ -36,6 +45,15 @@ export class LikesController {
 
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+    },
+  })
   @Post('update-like')
   async updateLike(
     @ReqUser() user: ReqUserType,
