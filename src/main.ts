@@ -3,10 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import * as passport from 'passport'
 import { AppModule } from './app.module'
 
-const PORT =
-  process.env.NODE_ENV === 'production'
-    ? Number.parseInt(process.env.PORT)
-    : 3000
+const PORT = process.env.NODE_ENV === 'production' ? process.env.PORT : '3000'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log'],
